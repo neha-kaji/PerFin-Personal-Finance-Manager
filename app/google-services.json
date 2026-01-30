@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "421188041458",
+    "project_id": "perfin-f4079",
+    "storage_bucket": "perfin-f4079.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421188041458:android:d5673d765af72dbded2e6b",
+        "android_client_info": {
+          "package_name": "com.example.perfin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421188041458-lf8fdjjj8egm0kurb0e60un1b20v4iei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuMdNAISzzwqTwx-CoU36Khw8BHB3-oCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421188041458-lf8fdjjj8egm0kurb0e60un1b20v4iei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
