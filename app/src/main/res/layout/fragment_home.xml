@@ -15,12 +15,14 @@
 
         <!-- Greeting -->
         <TextView
+            android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello 👋"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:fontFamily="@font/abril_fatface"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,7 +51,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total Spendings"
-                    android:textColor="@color/textSecondary"/>
+                    android:textColor="@color/textSecondary"
+                    android:fontFamily="@font/abril_fatface"/>
 
                 <TextView
                     android:id="@+id/tvTotalSpent"
@@ -58,7 +61,8 @@
                     android:text="₹ 0"
                     android:textSize="30sp"
                     android:textColor="@color/black"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -80,7 +84,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="My Budget"
-                    android:textColor="@color/textSecondary"/>
+                    android:textColor="@color/textSecondary"
+                    android:fontFamily="@font/abril_fatface"/>
 
                 <TextView
                     android:id="@+id/tvBudget"
@@ -89,7 +94,8 @@
                     android:text="₹ 0"
                     android:textSize="26sp"
                     android:textStyle="bold"
-                    android:textColor="@color/textPrimary"/>
+                    android:textColor="@color/textPrimary"
+                    android:fontFamily="sans-serif-medium"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -111,7 +117,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="My Budget After Savings"
-                    android:textColor="@color/textSecondary"/>
+                    android:textColor="@color/textSecondary"
+                    android:fontFamily="@font/abril_fatface"/>
 
                 <TextView
                     android:id="@+id/tvEffectiveBudget"
@@ -120,7 +127,8 @@
                     android:text="₹ 0"
                     android:textSize="26sp"
                     android:textStyle="bold"
-                    android:textColor="@color/textPrimary"/>
+                    android:textColor="@color/textPrimary"
+                    android:fontFamily="sans-serif-medium"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -142,7 +150,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Balance"
-                    android:textColor="@color/textSecondary"/>
+                    android:textColor="@color/textSecondary"
+                    android:fontFamily="@font/abril_fatface"/>
 
                 <TextView
                     android:id="@+id/tvBudgetRemaining"
@@ -151,7 +160,8 @@
                     android:text="₹ 0"
                     android:textSize="26sp"
                     android:textStyle="bold"
-                    android:textColor="@color/textPrimary"/>
+                    android:textColor="@color/textPrimary"
+                    android:fontFamily="sans-serif-medium"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -173,7 +183,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Savings"
-                    android:textColor="@color/textSecondary"/>
+                    android:textColor="@color/textSecondary"
+                    android:fontFamily="@font/abril_fatface"/>
 
                 <TextView
                     android:id="@+id/tvSavings"
@@ -182,7 +193,8 @@
                     android:text="₹ 0"
                     android:textSize="26sp"
                     android:textStyle="bold"
-                    android:textColor="@color/textPrimary"/>
+                    android:textColor="@color/textPrimary"
+                    android:fontFamily="sans-serif-medium"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -26,6 +27,7 @@ import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
+    private android.widget.TextView tvUserName, tvUserEmail;
     private EditText etSavings, etBudget;
     private ExpenseViewModel viewModel;
 
@@ -42,6 +44,8 @@ public class ProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        tvUserName = view.findViewById(R.id.tvUserName);
+        tvUserEmail = view.findViewById(R.id.tvUserEmail);
         etSavings = view.findViewById(R.id.etSavings);
         etBudget = view.findViewById(R.id.etBudget);
         Button btnSave = view.findViewById(R.id.btnSaveFinance);
@@ -53,12 +57,52 @@ public class ProfileFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity())
                 .get(ExpenseViewModel.class);
 
+        loadUserProfile();
         loadFinanceSettings();
 
         btnSave.setOnClickListener(v -> saveFinanceSettings());
         btnLogout.setOnClickListener(v -> logoutUser());
 
         return view;
+    }
+
+    // 🔥 Load user basic profile (name/email)
+    private void loadUserProfile() {
+        String uid = auth.getUid();
+        if (uid == null) {
+            applyUserProfile(null);
+            return;
+        }
+
+        db.collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(this::applyUserProfile)
+                .addOnFailureListener(e -> applyUserProfile(null));
+    }
+
+    private void applyUserProfile(DocumentSnapshot doc) {
+        String name = null;
+        String email = null;
+
+        if (doc != null && doc.exists()) {
+            name = doc.getString("name");
+            email = doc.getString("email");
+        }
+
+        FirebaseUser current = auth.getCurrentUser();
+        if ((name == null || name.trim().isEmpty()) && current != null) {
+            name = current.getDisplayName();
+        }
+        if ((email == null || email.trim().isEmpty()) && current != null) {
+            email = current.getEmail();
+        }
+
+        if (name == null || name.trim().isEmpty()) name = "Guest";
+        if (email == null || email.trim().isEmpty()) email = "--";
+
+        tvUserName.setText("Name: " + name);
+        tvUserEmail.setText("Email: " + email);
     }
 
     // 🔥 Load existing values from Firestore

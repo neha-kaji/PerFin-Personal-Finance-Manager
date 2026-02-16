@@ -11,8 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 public class HomeFragment extends Fragment {
 
+    private TextView tvGreeting;
     private TextView tvTotalSpent;
     private TextView tvBudget;
     private TextView tvSavings;
@@ -20,6 +25,8 @@ public class HomeFragment extends Fragment {
     private TextView tvBudgetRemaining;
 
     private ExpenseViewModel viewModel;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Nullable
     @Override
@@ -31,6 +38,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // 🔹 Bind Views
+        tvGreeting = view.findViewById(R.id.tvGreeting);
         tvTotalSpent = view.findViewById(R.id.tvTotalSpent);
         tvBudget = view.findViewById(R.id.tvBudget);
         tvSavings = view.findViewById(R.id.tvSavings);
@@ -41,7 +49,12 @@ public class HomeFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity())
                 .get(ExpenseViewModel.class);
 
+        // 🔐 Initialize auth/db for greeting
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         observeViewModel();
+        loadGreeting();
 
         return view;
     }
@@ -99,6 +112,37 @@ public class HomeFragment extends Fragment {
         } else {
             tvEffectiveBudget.setText("--");
             tvBudgetRemaining.setText("--");
+        }
+    }
+
+    private void loadGreeting() {
+        String uid = auth.getUid();
+        if (uid == null) {
+            tvGreeting.setText("Hello 👋");
+            return;
+        }
+
+        db.collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(this::applyGreeting)
+                .addOnFailureListener(e -> tvGreeting.setText("Hello 👋"));
+    }
+
+    private void applyGreeting(DocumentSnapshot doc) {
+        String name = null;
+        if (doc != null && doc.exists()) {
+            name = doc.getString("name");
+        }
+        if (name == null || name.trim().isEmpty()) {
+            if (auth.getCurrentUser() != null) {
+                name = auth.getCurrentUser().getDisplayName();
+            }
+        }
+        if (name == null || name.trim().isEmpty()) {
+            tvGreeting.setText("Hello 👋");
+        } else {
+            tvGreeting.setText("Hello " + name + " 👋");
         }
     }
 }
